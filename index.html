@@ -1,0 +1,634 @@
+<style>
+    body {
+        font-family: 'Open Sans', sans-serif;
+        background-color: #f9f9f9;
+    }
+    .container {
+        max-width: 900px;
+        margin: auto;
+        padding: 30px;
+        background-color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        display: block;
+    }
+    .header {
+        background-color: #0056b3;
+        color: #fff;
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        grid-column: span 2;
+        border-radius: 2.5%;
+    }
+    .header .logo-container {
+        background-color: #fff;
+        padding: 10px;
+        border-radius: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .header .operations-weekly {
+        flex: 1;
+    }
+    .header h2 {
+        margin: 0;
+        font-size: 24px;
+    }
+    .logo {
+        width: 100px;
+        height: auto;
+    }
+    .section {
+        margin-top: 20px;
+        flex: none;
+        page-break-before: always;
+    }
+    .section h5 {
+        color: #333;
+        margin-bottom: 15px;
+        font-weight: bold;
+        font-size: 18px;
+    }
+    .section ul {
+        list-style-type: none;
+        padding: 0;
+    }
+    .section ul li {
+        margin-bottom: 15px;
+        padding: 15px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        width: calc(100% - 30px);
+        box-sizing: border-box;
+    }
+    .section ul li::before {
+        content: "";
+        color: #4CAF50;
+        margin-right: 15px;
+        font-weight: bold;
+        font-size: 18px;
+    }
+    .priority-list ul li::before {
+        content: "";
+    }
+
+    .action-items ul li::before {
+        content: "";
+    }
+
+    .updates ul li::before {
+        content: "";
+    }
+    .priority-list, .action-items, .updates {
+        height: 100%;
+    }
+    .combined-section {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        height: 100%;
+    }
+    .priority-list h5, .action-items h5, .updates h5 {
+        font-size: 18px;
+    }
+    .priority-list ul li::before, .action-items ul li::before, .updates ul li::before {
+        font-size: 18px;
+    }
+    .open-items ul li::before {
+        content: "";
+    }
+    .action-items ul, .priority-list ul, .updates ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .action-items ul li, .priority-list ul li, .updates ul li {
+        padding-left: 0;
+    }
+
+    .updates ul {
+        list-style-type: disc;
+        padding-left: 20px;
+    }
+    .action-items ul {
+        list-style-type: disc;
+        padding-left: 20px;
+    }
+    .priority-list ul {
+        list-style-type: disc;
+        padding-left: 20px;
+    }
+    .status-in-progress {
+        color: #ff4000; /* Orange for In Progress */
+    }
+    .status-in-business-user-confirmation {
+        color: #ff9d00; /* Orange for In Progress */
+    }
+    .status-in-review {
+        color: #007BFF; /* Blue for In Review */
+    }
+    .status-datamigration {
+        color: #de2d2d; /* Red for datamigration */
+    }
+
+    /* New styles for table rows */
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        background-color: #fff;
+        margin: 20px 0;
+    }
+    th {
+        background-color: #0056b3; /* Header background color */
+        color: #fff; /* Header text color */
+        text-align: center; /* Center text for all header cells */
+    }
+    td:nth-child(1), td:nth-child(2), td:nth-child(5) {
+        text-align: center; /* Center text for ID, DevOps, and Action columns */
+    }
+    td:nth-child(3) {
+        width: 50%; /* Increase width for Issue Title */
+    }
+    tr:nth-child(even) {
+        background-color: #f2f2f2; /* Light gray for even rows */
+    }
+    tr:nth-child(odd) {
+        background-color: #ffffff; /* White for odd rows */
+    }
+    td:nth-child(6) {
+        text-align: center;
+    }
+
+    @media print {
+        body {
+            -webkit-print-color-adjust: exact; /* Ensure colors are printed as they appear on screen */
+            color-adjust: exact; /* For Firefox */
+            margin: 0; /* Remove default body margin */
+            padding: 0; /* Remove default body padding */
+        }
+        .container {
+            box-shadow: none; /* Remove shadows for print */
+            margin: 0; /* Remove margins for print */
+            padding: 5px; /* Reduce padding for a tighter layout */
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            background-color: #fff; /* Ensure table background is white */
+            margin: 0; /* Remove vertical margin */
+        }
+        th, td {
+            border: 1px solid #000; /* Add borders to table cells for clarity */
+            padding: 3px; /* Further reduce padding for better space management */
+            font-size: 10px; /* Decrease font size to fit more content */
+        }
+        tr {
+            page-break-inside: avoid; /* Prevent rows from breaking across pages */
+        }
+        /* Specific targeting for row 8 if needed */
+        tr:nth-child(8) {
+            page-break-inside: avoid; /* Ensure row 8 does not split */
+        }
+        /* Hide elements that should not be printed */
+        .no-print {
+            display: none; /* Add a class to elements you want to hide during print */
+        }
+        /* Additional styles to ensure everything fits on one page */
+        h2, h5 {
+            margin: 2px 0; /* Reduce margins for headers */
+        }
+        p {
+            margin: 2px 0; /* Reduce margins for paragraphs */
+        }
+        /* Adjust the height of the sections to fit more content */
+        .section {
+            page-break-after: avoid; /* Prevent page breaks after sections */
+            margin-top: 10px; /* Reduce margin to avoid overlap */
+        }
+        /* Ensure header is printed at the top of the first page only */
+        .header {
+            background-color: #0056b3; /* Match header background */
+            color: #fff; /* Match header text color */
+            padding: 10px; /* Reduce padding */
+            margin-bottom: 10px; /* Space below header */
+        }
+        /* Prevent tables from breaking across pages */
+        table {
+            page-break-inside: avoid; /* Prevent table rows from breaking */
+            margin-bottom: 10px; /* Space below tables */
+        }
+    }
+
+    .section.open-items {
+        margin-top: 20px;
+        flex: none;
+        page-break-before: always; /* Ensure this section starts on a new page */
+    }
+
+    /* Center text in the Action column of the second section */
+    .section.open-items table tbody tr td:nth-child(4) {
+        text-align: center; /* Center text for Action column */
+    }
+
+    /* New styles for priority */
+    .priority {
+        display: inline-block;
+        width: 30px; /* Adjust width as needed */
+        height: 30px; /* Adjust height as needed */
+        border-radius: 50%; /* Make it circular */
+        text-align: center; /* Center the text */
+        line-height: 30px; /* Center the text vertically */
+        color: #fff; /* Text color */
+    }
+    .priority-1 {
+        background-color: #ff0000; /* Red for highest priority */
+    }
+    .priority-2 {
+        background-color: #fc292c; /* Orange for second priority */
+    }
+    .priority-3 {
+        background-color:#f45255; /* Yellow for third priority */
+    }
+    .priority-4 {
+        background-color: rgb(255, 110, 110); /* Green for lowest priority */
+    }
+</style>
+
+<div class="container">
+    <div class="header">
+        <div class="logo-container">
+            <img src="/Issue_Tracker/NO_Image.png" alt="Logo" class="logo">
+        </div>
+        <div class="operations-weekly">
+            <h2>Operations | Weekly Issues Recap  - <span id="current-date"></span></h2>
+        </div>
+    </div>
+    <div class="section open-items">
+        <h5><span class="open-items-icon">⚠️</span> Open IRIS Escalated Issues</h5>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>JIRA</th>
+                    <th>Issue</th>
+                    <th>Priority</th>
+                    <th>Status</th>
+                    <th>Release Assigned</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>306</td>
+                    <td>NA</td>
+                    <td>Reporting CL Order Delivery Issue</td>
+                    <td><span class="priority priority-1">1</span></td>
+                    <td>On Hold</td>
+                    <td>NA</td>
+                </tr>
+                <tr>
+                    <td>179</td>
+                    <td>NA</td>
+                    <td>Daily Flash Report Not Updating Correctly from IRIS Data</td>
+                    <td><span class="priority priority-1">1</span></td>
+                    <td>On Hold</td>
+                    <td>NA</td>
+                </tr>
+                <tr>
+                    <td>392</td>
+                    <td>IR-1428</td>
+                    <td>Issue with RX Cylinder Conversion</td>
+                    <td><span class="priority priority-1">1</span></td>
+                    <td>Release Assigned</td>
+                    <td>IRIS_R_16.00.00</td>
+                </tr>
+                <tr>
+                    <td>401</td>
+                    <td>IR-1547</td>
+                    <td>Prepaid Order Error when Checking Out</td>
+                    <td><span class="priority priority-2">2</span></td>
+                    <td>Data Fix</td>
+                    <td>NA</td>
+                </tr>
+                <tr>
+                    <td>407</td>
+                    <td>IR-1546</td>
+                    <td>Unable to Find Patient's Profile</td>
+                    <td><span class="priority priority-2">2</span></td>
+                    <td>Data Migration Issue</td>
+                    <td>NA</td>
+                </tr>
+                <tr>
+                    <td>343</td>
+                    <td>IR-1021</td>
+                    <td>Unable to Process Refund</td>
+                    <td><span class="priority priority-2">2</span></td>
+                    <td>Data Migration Issue</td>
+                    <td>NA</td>
+                </tr>
+                <tr>
+                    <td>328</td>
+                    <td>IR-552</td>
+                    <td>Escalation: Payment Discrepancy Between IRIS and Clover - Store 69</td>
+                    <td><span class="priority priority-2">2</span></td>
+                    <td>Data Migration Issue</td>
+                    <td>NA</td>
+                </tr>
+                <tr>
+                    <td>317</td>
+                    <td>IR-887</td>
+                    <td>Data Migration: Unable to dispense order</td>
+                    <td><span class="priority priority-2">2</span></td>
+                    <td>Data Migration Issue</td>
+                    <td>NA</td>
+                </tr>
+                <tr>
+                    <td>338</td>
+                    <td>IR-552</td>
+                    <td>Receipt Discrepancy - Outstanding Balance Not Displayed (Store 300, Patient 20201850)</td>
+                    <td><span class="priority priority-1">2</span></td>
+                    <td>On Hold</td>
+                    <td>NA</td>
+                </tr>
+                <tr>
+                    <td>309</td>
+                    <td>NA</td>
+                    <td>Refund Issue with Clover for Patient 20062431</td>
+                    <td><span class="priority priority-2">2</span></td>
+                    <td>On Hold</td>
+                    <td>NA</td>
+                </tr>
+                <tr>
+                    <td>99</td>
+                    <td>IR-123</td>
+                    <td>Missing Roll and Polish Option for Remake Order Processing</td>
+                    <td><span class="priority priority-2">2</span></td>
+                    <td>On Hold</td>
+                    <td>IRIS_R_13.00.00</td>
+                </tr>
+                <tr>
+                    <td>277</td>
+                    <td>IR-770</td>
+                    <td>Receipt Missing Pending Balance</td>
+                    <td><span class="priority priority-2">2</span></td>
+                    <td>Release Assigned</td>
+                    <td>IRIS_R_15.00.00</td>
+                </tr>
+                <tr>
+                    <td>403</td>
+                    <td>IR-1547</td>
+                    <td>Order Stuck in Prepaid</td>
+                    <td><span class="priority priority-3">3</span></td>
+                    <td>Data Fix</td>
+                    <td>NA</td>
+                </tr>
+                <tr>
+                    <td>410</td>
+                    <td>IR-1547</td>
+                    <td>Prepaid order</td>
+                    <td><span class="priority priority-3">3</span></td>
+                    <td>Data Fix</td>
+                    <td>NA</td>
+                </tr>
+                <tr>
+                    <td>393</td>
+                    <td>IR-1543</td>
+                    <td>Incorrect Balance Due Display in IRIS</td>
+                    <td><span class="priority priority-3">3</span></td>
+                    <td>Data Fix</td>
+                    <td>NA</td>
+                </tr>
+                <tr>
+                    <td>379</td>
+                    <td>IR-1420</td>
+                    <td>Online order-Missing PD</td>
+                    <td><span class="priority priority-3">3</span></td>
+                    <td>Data Fix</td>
+                    <td>NA</td>
+                </tr>
+                <tr>
+                    <td>371</td>
+                    <td>IR-1283</td>
+                    <td>Overcharge ID 20242130-INC0106018</td>
+                    <td><span class="priority priority-3">3</span></td>
+                    <td>Data Fix</td>
+                    <td>NA</td>
+                </tr>
+                <tr>
+                    <td>362</td>
+                    <td>IR-1282</td>
+                    <td>Can't dispensed glasses order Store 7134</td>
+                    <td><span class="priority priority-3">3</span></td>
+                    <td>Data Fix</td>
+                    <td>NA</td>
+                </tr>
+                <tr>
+                    <td>346</td>
+                    <td>IR-1276</td>
+                    <td>Missing Patient Information Order Processed</td>
+                    <td><span class="priority priority-3">3</span></td>
+                    <td>Data Fix</td>
+                    <td>NA</td>
+                </tr>
+                <tr>
+                    <td>348</td>
+                    <td>IR-1275</td>
+                    <td>Error message when changing an appt type</td>
+                    <td><span class="priority priority-3">3</span></td>
+                    <td>Data Fix</td>
+                    <td>NA</td>
+                </tr>
+                <tr>
+                    <td>335</td>
+                    <td>IR-1274</td>
+                    <td>Order Mislinked Between Patient Profiles in IRIS - Example 135774382</td>
+                    <td><span class="priority priority-3">3</span></td>
+                    <td>Data Fix</td>
+                    <td>NA</td>
+                </tr>
+                <tr>
+                    <td>411</td>
+                    <td>IR-1279</td>
+                    <td>Data missing from Zeus</td>
+                    <td><span class="priority priority-3">3</span></td>
+                    <td>Data Migration Issue</td>
+                    <td>NA</td>
+                </tr>
+                <tr>
+                    <td>363</td>
+                    <td>IR-924</td>
+                    <td>Daughetrs ID 20168373 when to 20210395 that is for her mother</td>
+                    <td><span class="priority priority-3">3</span></td>
+                    <td>Data Migration Issue</td>
+                    <td>NA</td>
+                </tr>
+                <tr>
+                    <td>364</td>
+                    <td>IR-924</td>
+                    <td>Migrated Zeus ID 2061116 to Iris</td>
+                    <td><span class="priority priority-3">3</span></td>
+                    <td>Data Migration Issue</td>
+                    <td>NA</td>
+                </tr>
+                <tr>
+                    <td>358</td>
+                    <td>IR-1278</td>
+                    <td>Merge Patient Profiles</td>
+                    <td><span class="priority priority-3">3</span></td>
+                    <td>Data Migration Issue</td>
+                    <td>NA</td>
+                </tr>
+                <tr>
+                    <td>353</td>
+                    <td>IR-1276</td>
+                    <td>Remake Order Workflow Issue</td>
+                    <td><span class="priority priority-3">3</span></td>
+                    <td>Data Migration Issue</td>
+                    <td>NA</td>
+                </tr>
+                <tr>
+                    <td>336</td>
+                    <td>IR-1273</td>
+                    <td>IRIS Refund Error: User Role Issue and Payment Discrepancy with Zeus</td>
+                    <td><span class="priority priority-3">3</span></td>
+                    <td>Data Migration Issue</td>
+                    <td>NA</td>
+                </tr>
+                <tr>
+                    <td>324</td>
+                    <td>IR-921</td>
+                    <td>Add Frame Club to Patient File: (ID 8195828)</td>
+                    <td><span class="priority priority-3">3</span></td>
+                    <td>Data Migration Issue</td>
+                    <td>NA</td>
+                </tr>
+                <tr>
+                    <td>326</td>
+                    <td>IR-924</td>
+                    <td>Patient Merge: (ID 8661070 ) with husbandr's File (ID 20160962)</td>
+                    <td><span class="priority priority-3">3</span></td>
+                    <td>Data Migration Issue</td>
+                    <td>NA</td>
+                </tr>
+                <tr>
+                    <td>327</td>
+                    <td>IR-924</td>
+                    <td>Patient Merge: (ID 1734116) with fathers File (ID 8753450)</td>
+                    <td><span class="priority priority-3">3</span></td>
+                    <td>Data Migration Issue</td>
+                    <td>NA</td>
+                </tr>
+                <tr>
+                    <td>301</td>
+                    <td>IR-819</td>
+                    <td>Migrate ID 8262770 from Zeus to IRIS to ID 8263204</td>
+                    <td><span class="priority priority-3">3</span></td>
+                    <td>Data Migration Issue</td>
+                    <td>NA</td>
+                </tr>
+                <tr>
+                    <td>271</td>
+                    <td>IR-822</td>
+                    <td>Data transfer from Zeus to Iris</td>
+                    <td><span class="priority priority-3">3</span></td>
+                    <td>Data Migration Issue</td>
+                    <td>NA</td>
+                </tr>
+                <tr>
+                    <td>260</td>
+                    <td>IR-823</td>
+                    <td>Incorrect balance on Account</td>
+                    <td><span class="priority priority-3">3</span></td>
+                    <td>Data Migration Issue</td>
+                    <td>NA</td>
+                </tr>
+                <tr>
+                    <td>228</td>
+                    <td>IR-825</td>
+                    <td>Patient Order Search Issue: Unable to Locate Patient Orders in IRIS</td>
+                    <td><span class="priority priority-3">3</span></td>
+                    <td>Data Migration Issue</td>
+                    <td>NA</td>
+                </tr>
+                <tr>
+                    <td>412</td>
+                    <td>IR-1584</td>
+                    <td>Overcharge Online Order</td>
+                    <td><span class="priority priority-3">3</span></td>
+                    <td>On Hold</td>
+                    <td>NA</td>
+                </tr>
+                <tr>
+                    <td>252</td>
+                    <td>IR-552</td>
+                    <td>Order Error: $79 Promotion Applied</td>
+                    <td><span class="priority priority-3">3</span></td>
+                    <td>On Hold</td>
+                    <td>NA</td>
+                </tr>
+                <tr>
+                    <td>119</td>
+                    <td>IR-131</td>
+                    <td>Request to Delete Fake IRIS Profile</td>
+                    <td><span class="priority priority-4">4</span></td>
+                    <td>On Hold</td>
+                    <td>IRIS_R_15.00.00</td>
+                </tr>
+                <tr>
+                    <td>404</td>
+                    <td>IR-771</td>
+                    <td>Order cant be dispensed</td>
+                    <td><span class="priority priority-4">4</span></td>
+                    <td>Release Assigned</td>
+                    <td>IRIS_R_16.00.00</td>
+                </tr>
+                <tr>
+                    <td>398</td>
+                    <td>IR-771</td>
+                    <td>Unable to dispense due to balance due</td>
+                    <td><span class="priority priority-4">4</span></td>
+                    <td>Release Assigned</td>
+                    <td>IRIS_R_16.00.00</td>
+                </tr>
+                <tr>
+                    <td>383</td>
+                    <td>IR-771</td>
+                    <td>Unable to Change Order Status: System Incorrectly Flags Balance Due</td>
+                    <td><span class="priority priority-4">4</span></td>
+                    <td>Release Assigned</td>
+                    <td>IRIS_R_16.00.00</td>
+                </tr>
+                <tr>
+                    <td>31</td>
+                    <td>IR-441</td>
+                    <td>Add 'Cycle Count' Option for Inventory Adjustments</td>
+                    <td><span class="priority priority-4">4</span></td>
+                    <td>Release Assigned</td>
+                    <td>IRIS_R_16.00.00</td>
+                </tr>
+                <tr>
+                    <td>176</td>
+                    <td>IR-826</td>
+                    <td>Migration Request for Patient 8434009's Orders from Zeus to IRIS</td>
+                    <td><span class="priority priority-4">4</span></td>
+                    <td>Data Migration Issue</td>
+                    <td>NA</td>
+                </tr>
+                <tr>
+                    <td>275</td>
+                    <td>IR-827</td>
+                    <td>Data migration Issue</td>
+                    <td><span class="priority priority-4">4</span></td>
+                    <td>Data Migration Issue</td>
+                    <td>NA</td>
+                </tr>
+            </tbody>
+        </table>
+        <p style="font-weight: bold; background-color: yellow; padding: 10px; text-align: center;">Please be sure to update this in resolution tracker.</p>
+    </div>
+
+<script>
+    document.getElementById("current-date").innerHTML = new Date().toLocaleDateString();
+</script>
