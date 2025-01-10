@@ -122,19 +122,19 @@
         padding-left: 20px;
     }
     .status-in-progress {
-        color: #ff4000; /* Orange for In Progress */
+        color: #ff4000; 
     }
     .status-in-business-user-confirmation {
-        color: #ff9d00; /* Orange for In Progress */
+        color: #ff9d00; 
     }
     .status-in-review {
-        color: #007BFF; /* Blue for In Review */
+        color: #007BFF; 
     }
     .status-datamigration {
-        color: #de2d2d; /* Red for datamigration */
+        color: #de2d2d; 
     }
 
-    /* New styles for table rows */
+    
     table {
         border-collapse: collapse;
         width: 100%;
@@ -142,21 +142,21 @@
         margin: 20px 0;
     }
     th {
-        background-color: #0056b3; /* Header background color */
-        color: #fff; /* Header text color */
-        text-align: center; /* Center text for all header cells */
+        background-color: #0056b3; 
+        color: #fff; 
+        text-align: center; 
     }
     td:nth-child(1), td:nth-child(2), td:nth-child(5) {
-        text-align: center; /* Center text for ID, DevOps, and Action columns */
+        text-align: center; 
     }
     td:nth-child(3) {
-        width: 50%; /* Increase width for Issue Title */
+        width: 50%; 
     }
     tr:nth-child(even) {
-        background-color: #f2f2f2; /* Light gray for even rows */
+        background-color: #f2f2f2; 
     }
     tr:nth-child(odd) {
-        background-color: #ffffff; /* White for odd rows */
+        background-color: #ffffff; 
     }
     td:nth-child(6) {
         text-align: center;
@@ -164,96 +164,95 @@
 
     @media print {
         body {
-            -webkit-print-color-adjust: exact; /* Ensure colors are printed as they appear on screen */
-            color-adjust: exact; /* For Firefox */
-            margin: 0; /* Remove default body margin */
-            padding: 0; /* Remove default body padding */
+            -webkit-print-color-adjust: exact; 
+            color-adjust: exact; 
+            margin: 0; 
+            padding: 0; 
         }
         .container {
-            box-shadow: none; /* Remove shadows for print */
-            margin: 0; /* Remove margins for print */
-            padding: 5px; /* Reduce padding for a tighter layout */
+            box-shadow: none; 
+            margin: 0; 
+            padding: 5px; 
         }
         table {
             border-collapse: collapse;
             width: 100%;
-            background-color: #fff; /* Ensure table background is white */
-            margin: 0; /* Remove vertical margin */
+            background-color: #fff; 
+            margin: 0; 
         }
         th, td {
-            border: 1px solid #000; /* Add borders to table cells for clarity */
-            padding: 3px; /* Further reduce padding for better space management */
-            font-size: 10px; /* Decrease font size to fit more content */
+            border: 1px solid #000; 
+            padding: 3px; 
+            font-size: 10px; 
         }
         tr {
-            page-break-inside: avoid; /* Prevent rows from breaking across pages */
+            page-break-inside: avoid; 
         }
-        /* Specific targeting for row 8 if needed */
+        
         tr:nth-child(8) {
-            page-break-inside: avoid; /* Ensure row 8 does not split */
+            page-break-inside: avoid; 
         }
-        /* Hide elements that should not be printed */
+        
         .no-print {
-            display: none; /* Add a class to elements you want to hide during print */
+            display: none; 
         }
-        /* Additional styles to ensure everything fits on one page */
+        
         h2, h5 {
-            margin: 2px 0; /* Reduce margins for headers */
+            margin: 2px 0; 
         }
         p {
-            margin: 2px 0; /* Reduce margins for paragraphs */
+            margin: 2px 0; 
         }
-        /* Adjust the height of the sections to fit more content */
+        
         .section {
-            page-break-after: avoid; /* Prevent page breaks after sections */
-            margin-top: 10px; /* Reduce margin to avoid overlap */
+            page-break-after: avoid; 
+            margin-top: 10px; 
         }
-        /* Ensure header is printed at the top of the first page only */
+        
         .header {
-            background-color: #0056b3; /* Match header background */
-            color: #fff; /* Match header text color */
-            padding: 10px; /* Reduce padding */
-            margin-bottom: 10px; /* Space below header */
+            background-color: #0056b3; 
+            color: #fff; 
+            padding: 10px; 
+            margin-bottom: 10px; 
         }
-        /* Prevent tables from breaking across pages */
         table {
-            page-break-inside: avoid; /* Prevent table rows from breaking */
-            margin-bottom: 10px; /* Space below tables */
+            page-break-inside: avoid; 
+            margin-bottom: 10px;
         }
     }
 
     .section.open-items {
         margin-top: 20px;
         flex: none;
-        page-break-before: always; /* Ensure this section starts on a new page */
+        page-break-before: always; 
     }
 
-    /* Center text in the Action column of the second section */
+   
     .section.open-items table tbody tr td:nth-child(4) {
-        text-align: center; /* Center text for Action column */
+        text-align: center; 
     }
 
     /* New styles for priority */
     .priority {
         display: inline-block;
-        width: 30px; /* Adjust width as needed */
-        height: 30px; /* Adjust height as needed */
-        border-radius: 50%; /* Make it circular */
-        text-align: center; /* Center the text */
-        line-height: 30px; /* Center the text vertically */
-        color: #fff; /* Text color */
+        width: 30px;
+        height: 30px; 
+        border-radius: 50%; 
+        text-align: center;
+        line-height: 30px; 
+        color: #fff; 
     }
     .priority-1 {
-        background-color: #ff0000; /* Red for highest priority */
+        background-color: #ff0000; 
     }
     .priority-2 {
-        background-color: #fc292c; /* Orange for second priority */
+        background-color: #fc292c; 
     }
     .priority-3 {
-        background-color:#f45255; /* Yellow for third priority */
+        background-color:#f45255; 
     }
     .priority-4 {
-        background-color: rgb(255, 110, 110); /* Green for lowest priority */
+        background-color: rgb(255, 110, 110); 
     }
 </style>
 
